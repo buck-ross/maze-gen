@@ -1,4 +1,5 @@
-/mazeGen
+/maze-gen
 *.o
 *.xpm
+*.so
 

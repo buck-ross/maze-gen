@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "grid.h"
+#include "weave.h"
 
 int main(int argc, char** argv) {
 	// Check the arguments:
@@ -26,6 +27,9 @@ int main(int argc, char** argv) {
 	// Create the grid:
 	char maze[height][width];
 	gridInit((char*)&maze[0][0], height, width);
+
+	// Generate the maze:
+	weaveGrid((char*)&maze[0][0], height, width);
 
 	// Write the output data to the file:
 	gridWrite((const char*)&maze[0][0], height, width, file);

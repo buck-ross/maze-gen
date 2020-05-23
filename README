@@ -1,0 +1,52 @@
+                                                                                           
+                                                                                           
+   _/_/_/  _/_/      _/_/_/  _/_/_/_/    _/_/                  _/_/_/    _/_/    _/_/_/    
+  _/    _/    _/  _/    _/      _/    _/_/_/_/  _/_/_/_/_/  _/    _/  _/_/_/_/  _/    _/   
+ _/    _/    _/  _/    _/    _/      _/                    _/    _/  _/        _/    _/    
+_/    _/    _/    _/_/_/  _/_/_/_/    _/_/_/                _/_/_/    _/_/_/  _/    _/     
+                                                               _/                          
+                                                          _/_/                             
+
+===========================================================================================
+
+A CLI application to generate mazes & write them to XPM images files (or shared libraries).
+
+By Buckley Ross <buckleyross42 at gmail dot com>
+
+===========================================================================================
+
+Usage:
+	`maze-gen <file.xpm> <height> <width>`
+	`make libmaze.so`
+
+	<file.xpm>: You can call the file whatever you want, but the `make` rule to compile
+		`libmaze.so` will only operate on a file named `maze.xpm`.
+
+	<height>: This must be a positive, odd integer 3 <= n <= 2051.
+
+	<width>: This, like <height>, must be a positive, odd integer 3 <= n <= 2051.
+
+	`maze-gen <file.xpm> <height> <width>` is sufficient to generate a maze in XPM image
+	format. The `make libmaze.so` step is purely optional, but can be useful if you want
+	to make use of `maze.xpm` from a C program. `maze.h` is the corresponding header file
+	for `libmaze.so`, and can be found under the `include` directory, along with all of
+	the project's internal header files.
+
+===========================================================================================
+
+Building from Source:
+	Once the source code has been downloaded & extracted, `make maze-gen` will compile the
+	`maze-gen` program. No additional libraries are required for the program to run.
+
+	`make libmaze.so` can be used to automatically build a 51x51 maze, write it to the
+	`maze.xpm` file, & then compile the resulting maze into a shared library. If 51x51 is
+	not the desired size, simply run `maze-gen maze.xpm <height> <width>`, before
+	re-running `make libmaze.so` to re-build the shared library.
+
+===========================================================================================
+
+Copyright:
+	Copyright (C) 2020 Buckley Ross
+	This project is licensed under the MIT License Agreement (MIT).
+	For a complete copy of the license, please see the included `LICENSE` file.
+

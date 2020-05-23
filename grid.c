@@ -2,7 +2,7 @@
 #include <string.h>
 
 // Declare constant variables to store the XPM header:
-static const char* XPMHeader = "/* XPM */\nstatic char* xpmData[] = {\n";
+static const char* XPMHeader = "/* XPM */\nstatic const char* xpmData[] = {\n";
 static const char* XPMColors = "\"p\tc #FFFFFF\",\n\"w\tc #000000\",\n";
 
 // Export a method to initialize the grid with a set of squares & walls:
@@ -11,7 +11,11 @@ void gridInit(char* grid, int height, int width) {
 	for(int i = 0; i < height; ++i)
 		for(int j = 0; j < width; ++j)
 			// Declare a wall:
-			grid[i * height + j] = 'w';
+			grid[i * width + j] = 'w';
+	
+	// Define the grid's starting & ending points:
+	grid[1] = 'p';
+	grid[height * width - 2] = 'p';
 }
 
 // Export a method to write the provided grid out to a file:
@@ -30,7 +34,7 @@ void gridWrite(const char* grid, const int height, const int width, FILE* file) 
 	rowBuff[width + 2] = ',';
 	rowBuff[width + 3] = '\n';
 	for(int i = 0; i < height - 1; ++i) {
-		strncpy(&rowBuff[1], &grid[i * height], width);
+		strncpy(&rowBuff[1], &grid[i * width], width);
 		fwrite(&rowBuff[0], 1, width + 4, file);
 	}
 
@@ -39,7 +43,7 @@ void gridWrite(const char* grid, const int height, const int width, FILE* file) 
 	rowBuff[width + 3] = ';';
 	rowBuff[width + 4] = '\n';
 	rowBuff[width + 5] = '\n';
-	strncpy(&rowBuff[1], &grid[(height - 1) * height], width);
-		fwrite(&rowBuff[0], 1, width + 6, file);
+	strncpy(&rowBuff[1], &grid[(height - 1) * width], width);
+	fwrite(&rowBuff[0], 1, width + 6, file);
 }
 
